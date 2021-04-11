@@ -1,25 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import {Header} from "./modues/common/components/Header";
+import Container from "@material-ui/core/Container";
+import {
+    BrowserRouter as Router,
+    Redirect,
+    Route,
+    Switch,
+} from 'react-router-dom';
+import {Navigation} from "./modues/common/components/Navigation";
+import {Dashboard} from "./modues/dashboard/components/Dashboard";
+import {Albums} from "./modues/albums/components/Albums";
+import {Users} from "./modues/users/components/Users";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <Header/>
+            <Container maxWidth='xl'>
+                <Navigation/>
+                <Switch>
+                    <Route path='/dashboard' component={Dashboard}/>
+                    <Route path='/users' component={Users}/>
+                    <Route path='/albums' component={Albums}/>
+                    <Route path='/' exact>
+                        <Redirect to='/dashboard'/>
+                    </Route>
+                </Switch>
+            </Container>
+        </Router>
+
+
+    );
 }
 
 export default App;
